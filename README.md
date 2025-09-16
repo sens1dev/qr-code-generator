@@ -4,8 +4,9 @@
 - Accepts any text or URL input
 - Saves the QR code as a PNG image
 - Uses the `qrcode` Python library
+- Uses the `tkinter` and `customtkinter` Python library
 - Customizable filename
-
+- It has GUI
 
 ## How to Run
 1. Make sure you have Python installed.
