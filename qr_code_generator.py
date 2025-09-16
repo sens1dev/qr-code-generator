@@ -1,20 +1,24 @@
 import tkinter
 import customtkinter as ctk
 import qrcode
+import tkinter.messagebox as msgbox
 
 def generate_qr():
     data = entry_url.get()
     filename = entry_file.get()
 
     if not data or not filename:
+        msgbox.showerror("Fill required areas", "Please fill out the required areas.")
         return
+
+    if filename.endswith('.png'):
+        filename = filename[:-4]
 
     qr = qrcode.QRCode(box_size=10, border=1)
     qr.add_data(data)
     image = qr.make_image(fill_color='black', back_color='white')
     image.save(f"{filename}.png")
-    print(f"QR Code saved to {filename}.png")
-
+    msgbox.showinfo("QR Code Generated", f"{filename}.png successfully saved.")
 
 app = ctk.CTk()
 app.title("GRCodeGenerator")
@@ -42,7 +46,7 @@ entry_file = ctk.CTkEntry(master=frame, height=26, corner_radius=8)
 entry_file.pack(pady=5, padx=12, fill="x")
 
 #Here is "Send" button
-send_button = ctk.CTkButton(master=frame, text="Send", width=120, height=40, corner_radius=10, cursor="hand2", command=generate_qr)
+send_button = ctk.CTkButton(master=frame, text="Send", width=120, height=40, corner_radius=10, cursor="hand2", command=generate_qr, fg_color="black", hover_color="gray")
 send_button.pack(pady=(40,20))
 app.mainloop()
 
